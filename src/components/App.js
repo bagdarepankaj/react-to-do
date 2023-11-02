@@ -5,10 +5,11 @@ import AppModal from "./AppModal";
 import { useState } from "react";
 
 function App() {
+  const defaultTask = { id: "", desc: "" }
   const [show, setShow] = useState(false);
-  const [task, setTask] = useState({ id: "", desc: "" });
+  const [task, setTask] = useState(defaultTask);
 
-  const openModal = () => { setTask(""); setShow(true); };
+  const openModal = () => { setTask(defaultTask); setShow(true); };
   const setModal = (item) => { setTask(item); setShow(true); };
 
   return (

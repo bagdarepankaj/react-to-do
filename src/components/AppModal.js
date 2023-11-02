@@ -14,7 +14,7 @@ function AppModal(props) {
       dispatch(addTask(props.task.desc));
     }
     props.setShow(false);
-    props.setTask("");
+    props.setTask({ id: "", desc: "" });
   };
 
   return (
