@@ -1,20 +1,28 @@
 import "../styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch } from "react-redux";
-import { addTask } from '../app/action'
-
+import { addTask, updateTask } from "../app/action";
 
 function AppModal(props) {
-
-  // const myState = useSelector((state) => state.reducer);
   const dispatch = useDispatch();
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    if (props.task.id) {
+      dispatch(updateTask(props.task));
+    } else {
+      dispatch(addTask(props.task.desc));
+    }
+    props.setShow(false);
+    props.setTask("");
+  };
 
   return (
     <div className="modal" style={{ display: props.show ? "block" : "none" }}>
       <div className="modal-dialog" id="item">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Add New Item</h5>
+            <h5 className="modal-title">Add New Task</h5>
             <button
               type="button"
               className="btn-close"
@@ -23,7 +31,17 @@ function AppModal(props) {
             ></button>
           </div>
           <div className="modal-body">
-            <p>Modal body text goes here.</p>
+            <input
+              type="text"
+              id="task"
+              className="form-control"
+              placeholder="Enter Text"
+              key={props.task ? props.task.id : ""}
+              value={props.task.desc}
+              onChange={(e) =>
+                props.setTask({ id: props.task.id, desc: e.target.value })
+              }
+            ></input>
           </div>
           <div className="modal-footer">
             <button
@@ -34,7 +52,11 @@ function AppModal(props) {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary" onClick={() => dispatch(addTask('test'))}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={(e) => submitForm(e)}
+            >
               Save
             </button>
           </div>

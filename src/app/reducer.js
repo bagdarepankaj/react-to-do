@@ -16,9 +16,11 @@ function reducer(state = initialValue, action) {
             ]
         };
     }
-    // else if (action.type === "UPDATE") {
-    //     return state;
-    // }
+    else if (action.type === "UPDATE") {
+        const task = state.tasks.find((task) => task.id === action.payload.id)
+        task.desc = action.payload.desc
+        return state
+    }
     // else if (action.type === 'DELETE') {
     //     return state.reduce(task => task.id !== action.payload.id);
     // }

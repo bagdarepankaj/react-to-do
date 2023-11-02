@@ -7,13 +7,10 @@ function addTask(desc) {
     }
 }
 
-function updateTask(id, desc) {
+function updateTask(task) {
     return {
         type: "UPDATE",
-        payload: {
-            id: id,
-            desc: desc
-        }
+        payload: task
     }
 }
 

@@ -5,17 +5,22 @@ import AppModal from "./AppModal";
 import { useState } from "react";
 
 function App() {
-  const [show, setShow] = useState(false)
-  const openModal = () => setShow(true)
-  // const myState = useSelector((state) => state.reducer);
+  const [show, setShow] = useState(false);
+  const [task, setTask] = useState({ id: "", desc: "" });
+
+  const openModal = () => { setTask(""); setShow(true); };
+  const setModal = (item) => { setTask(item); setShow(true); };
+
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <h1 className="row col-10 justify-content-center">Hello World</h1>
-        <button className="col-2 btn btn-primary" onClick={openModal}> Add Task </button>
+    <div className="container">
+      <div className="row mt-5 mb-5">
+        <h1 className="row col-10 justify-content-center">TO DO APP</h1>
+        <button className="col-2 btn btn-primary" onClick={openModal}>
+          Add Task
+        </button>
       </div>
-      <ToDoContainer />
-      <AppModal show={show} setShow={setShow}/>
+      <ToDoContainer setModal={setModal} />
+      <AppModal show={show} setShow={setShow} task={task} setTask={setTask} />
     </div>
   );
 }
